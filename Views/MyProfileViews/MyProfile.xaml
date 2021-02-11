@@ -1,0 +1,42 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:converters="clr-namespace:lirksi.Mobile.Converters"
+             x:Class="lirksi.Mobile.Views.MyProfile"
+             Title="{Binding Title}"
+             BackgroundImageSource="background.jpg">
+    <ContentPage.Resources>
+        <converters:ImageConverter x:Key="imgConv"></converters:ImageConverter>
+        <StyleSheet Source="/Styles/main.css" ></StyleSheet>
+    </ContentPage.Resources>
+    <ContentPage.Content>
+        <ScrollView>
+            <StackLayout Orientation="Vertical" VerticalOptions="Center" Padding="5,5,5,5">
+                <Frame x:Name="circleFrame" HasShadow="False" Padding="0" Margin="0" VerticalOptions="Center" HorizontalOptions="Center" BackgroundColor="Gray">
+                    <Image Aspect="Fill" HeightRequest="250" WidthRequest="250" Source="{Binding User.Image, Converter={StaticResource imgConv}}" />
+                </Frame>
+                <Label Style="{DynamicResource ListItemTextStyle}" HorizontalOptions="Center" Text="Name: "></Label>
+                <Frame Padding = "0" CornerRadius="5" IsClippedToBounds="true"  >
+                    <Entry IsEnabled="False" IsReadOnly="True" Placeholder="Name" Text="{Binding User.Name}" ></Entry>
+                </Frame>
+                <Label Style="{DynamicResource ListItemTextStyle}" HorizontalOptions="Center" Text="Surname: "></Label>
+                <Frame Padding = "0" CornerRadius="5" IsClippedToBounds="true" >
+                    <Entry IsEnabled="False" IsReadOnly="True" Placeholder="Name" Text="{Binding User.Surname}" ></Entry>
+                </Frame>
+                <Label Style="{DynamicResource ListItemTextStyle}" HorizontalOptions="Center" Text="Email: "></Label>
+                <Frame Padding = "0" CornerRadius="5" IsClippedToBounds="true" >
+                    <Entry IsEnabled="False" IsReadOnly="True" Placeholder="Name" Text="{Binding User.Email}" ></Entry>
+                </Frame>
+                <Label Style="{DynamicResource ListItemTextStyle}" HorizontalOptions="Center" Text="Phone:"></Label>
+                <Frame Padding = "0" CornerRadius="5" IsClippedToBounds="true" >
+                    <Entry IsEnabled="False" IsReadOnly="True" Placeholder="Phone number" Text="{Binding User.PhoneNumber}" ></Entry>
+                </Frame>
+                <Label Style="{DynamicResource ListItemTextStyle}" HorizontalOptions="Center" Text="City: "></Label>
+                <Frame Padding = "0" CornerRadius="5" IsClippedToBounds="true" >
+                    <Entry IsEnabled="False" IsReadOnly="True" Placeholder="Name" Text="{Binding User.City.Name}" ></Entry>
+                </Frame>
+                <Button CornerRadius="5" Text="Edit profile" x:Name="EditProfile" Clicked="EditProfile_Clicked" StyleClass="button-custom"></Button>
+            </StackLayout>
+        </ScrollView>
+    </ContentPage.Content>
+</ContentPage>

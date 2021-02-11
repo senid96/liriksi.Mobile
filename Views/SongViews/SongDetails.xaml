@@ -1,0 +1,72 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:converters="clr-namespace:lirksi.Mobile.Converters"
+             xmlns:vm="clr-namespace:lirksi.Mobile.ViewModels"              
+             mc:Ignorable="d"
+             x:Class="lirksi.Mobile.Views.SongDetails"
+             Title="{Binding Title}"
+             BackgroundImageSource="background.jpg">
+    <ContentPage.BindingContext>
+        <vm:SongDetailsViewModel />
+    </ContentPage.BindingContext>
+    <ContentPage.Resources>
+        <converters:ImageConverter x:Key="imgConv"></converters:ImageConverter>
+        <StyleSheet Source="/Styles/main.css"></StyleSheet>
+    </ContentPage.Resources>
+    <ContentPage.Content>
+        <ScrollView HorizontalOptions="Center">
+            <StackLayout VerticalOptions="Center" HorizontalOptions="Center" Padding="5,5,5,5">
+                <Label VerticalOptions="Center" HorizontalOptions="Center" Text="Year:" Style="{DynamicResource ListItemTextStyle}" TextColor="Black"></Label>
+                <Label VerticalOptions="Center" HorizontalOptions="Center" Text="{Binding SongDetail.Album.YearRelease}" Style="{DynamicResource ListItemDetailTextStyle}"></Label>
+                <Label VerticalOptions="Center" HorizontalOptions="Center" Text="Album:" Style="{DynamicResource ListItemTextStyle}" TextColor="Black"></Label>
+                <Label VerticalOptions="Center" HorizontalOptions="Center" Text="{Binding SongDetail.Album.Name}" Style="{DynamicResource ListItemDetailTextStyle}"></Label>
+                <Label VerticalOptions="Center" HorizontalOptions="Center" Style="{DynamicResource TitleStyle}" Text="{Binding SongDetail.Title}" HorizontalTextAlignment="Center"></Label>
+                <Label VerticalOptions="Center" HorizontalOptions="Center" Text="{Binding SongDetail.Text}" HorizontalTextAlignment="Center"></Label>
+                <Frame Padding = "0" CornerRadius="5" IsClippedToBounds="true">
+                    <Picker x:Name="PickerRate" 
+                            Title="Rate this song: "
+                            TitleColor="Black"
+                            SelectedIndex="{Binding UserRate.Rate}"
+                            SelectedIndexChanged="PickerRate_SelectedIndexChanged"
+                            ItemsSource="{Binding DefaultRateList}">
+                    </Picker>
+                </Frame>
+                <Label Text="Your comment"></Label>
+                <Frame Padding = "0" CornerRadius="5" IsClippedToBounds="true">
+                    <Editor Text="{Binding UserRate.Comment}" x:Name="Comment" ></Editor>
+                </Frame>
+                <Button StyleClass="button-custom" CornerRadius="5" Clicked="Rate_Clicked" Text="Rate" x:Name="Rate"/>
+                <Button StyleClass="button-custom-second" CornerRadius="5" x:Name="DownloadSongBtn" Text="Download song" Clicked="DownloadSongBtn_Clicked" ></Button>
+
+                <!-- recommender view -->
+                <Label Padding="5" VerticalOptions="Center" HorizontalOptions="Center" Style="{DynamicResource SubtitleStyle}" x:Name="recommendedLabel" Text="Recommended songs:"></Label>
+                <ListView x:Name="RecommendedList" ItemsSource="{Binding RecommendedList}" ItemSelected="RecommendedList_ItemSelected" HorizontalOptions="Center" VerticalOptions="Center">
+                    <ListView.ItemTemplate>
+                        <DataTemplate>
+                            <ViewCell>
+                                <Grid Padding="3">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition></ColumnDefinition>
+                                        <ColumnDefinition></ColumnDefinition>
+                                    </Grid.ColumnDefinitions>
+                                    <StackLayout VerticalOptions="Center" >
+                                        <Label Text="{Binding Title}" Style="{DynamicResource ListItemTextStyle}" />
+                                        <Label Text="{Binding Album.Name}" Style="{DynamicResource CaptionStyle}" />
+                                    </StackLayout>
+                                    <StackLayout Grid.Column="1"  HorizontalOptions="End" VerticalOptions="Center">
+                                        <Frame x:Name="circleFrame" HasShadow="False" Padding="0" Margin="0" HorizontalOptions="Center" BackgroundColor="Gray">
+                                            <Image HorizontalOptions="Center" Aspect="Fill" HeightRequest="50" WidthRequest="50"  x:Name="AlbumImgSong" Source="{Binding Album.Image, Converter={StaticResource imgConv}}" ></Image>
+                                        </Frame>
+                                    </StackLayout>
+                                </Grid>
+                            </ViewCell>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+                </ListView>
+                </StackLayout>
+        </ScrollView>
+    </ContentPage.Content>
+</ContentPage>

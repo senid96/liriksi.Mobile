@@ -1,0 +1,67 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d"
+             x:Class="lirksi.Mobile.Views.AboutPage"
+             xmlns:vm="clr-namespace:lirksi.Mobile.ViewModels"
+             Title="{Binding Title}">
+    <ContentPage.Resources>
+        <StyleSheet Source="/Styles/main.css"></StyleSheet>
+    </ContentPage.Resources>
+    <ContentPage.BindingContext>
+        <vm:AboutViewModel />
+    </ContentPage.BindingContext>
+        <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+            <StackLayout Orientation="Horizontal" HorizontalOptions="Center" VerticalOptions="Center">
+                <ContentView Padding="0,40,0,40" VerticalOptions="FillAndExpand">
+                    <Image Source="music-logo.png" VerticalOptions="Center" HeightRequest="200" WidthRequest="200" />
+                </ContentView>
+            </StackLayout>
+        <ScrollView Grid.Row="1">
+            <StackLayout Orientation="Vertical" Padding="16,40,16,40" Spacing="10">
+                <Label FontSize="22">
+                    <Label.FormattedText>
+                        <FormattedString>
+                            <FormattedString.Spans>
+                                <Span Text="Liriksi" FontAttributes="Bold" FontSize="22" />
+                                <Span Text=" "></Span>
+                                <Span Text="v1.0" />
+                            </FormattedString.Spans>
+                        </FormattedString>
+                    </Label.FormattedText>
+                </Label>
+                <Label>
+                    <Label.FormattedText>
+                        <FormattedString>
+                            <FormattedString.Spans>
+                                <Span Text="Liriksi is a place where you can search your favourite song lyrics. You can rate them and download them. Search for your favourite performer, favourite album and read about them." />
+                                <Span Text=" "></Span>
+                                <Span Text="App created by Senid Ajkunić." />
+                            </FormattedString.Spans>
+                        </FormattedString>
+                    </Label.FormattedText>
+                </Label>
+                <Label>
+                    <Label.FormattedText>
+                        <FormattedString>
+                            <FormattedString.Spans>
+                              
+                            </FormattedString.Spans>
+                        </FormattedString>
+                    </Label.FormattedText>
+                </Label>
+                <Button CornerRadius="5" StyleClass="button-custom-second" Margin="0,10,0,0" Text="Visit Senid Ajkunic facebook profile"
+                        Command="{Binding OpenWebCommand}"
+                        TextColor="White" />
+            </StackLayout>
+        </ScrollView>
+    </Grid>
+    
+</ContentPage>

@@ -1,0 +1,40 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:converters="clr-namespace:lirksi.Mobile.Converters"
+             x:Class="lirksi.Mobile.Views.AlbumRatingsViews.AlbumRatings"
+             BackgroundImageSource="background.jpg"
+             Title="{Binding Title}">
+    <ContentPage.Resources>
+        <converters:ImageConverter x:Key="imgConv"></converters:ImageConverter>
+        <StyleSheet Source="/Styles/main.css"></StyleSheet>
+    </ContentPage.Resources>
+    <ContentPage.Content>
+        <StackLayout Padding="5,5,5,5">
+            <ListView x:Name="AlbumRateList" ItemSelected="AlbumRateList_ItemSelected" ItemsSource="{Binding AlbumRateList}">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <ViewCell>
+                            <Grid Padding="3">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition></ColumnDefinition>
+                                    <ColumnDefinition></ColumnDefinition>
+                                </Grid.ColumnDefinitions>
+                                <StackLayout VerticalOptions="Center" >
+                                    <Label Text="{Binding Title}" Style="{DynamicResource ListItemTextStyle}" />
+                                    <Label Text="{Binding Performer}" Style="{DynamicResource CaptionStyle}" />
+                                    <Label Text="{Binding AvgRate}" Style="{DynamicResource CaptionStyle}" />
+                                </StackLayout>
+                                <StackLayout Grid.Column="1"  HorizontalOptions="End" VerticalOptions="Center">
+                                    <Frame x:Name="circleFrame" HasShadow="False" Padding="0" Margin="0" HorizontalOptions="Center" BackgroundColor="Gray">
+                                        <Image HorizontalOptions="Center" Aspect="Fill" HeightRequest="50" WidthRequest="50"  x:Name="AlbumImgSong" Source="{Binding Image, Converter={StaticResource imgConv}}" ></Image>
+                                    </Frame>
+                                </StackLayout>
+                            </Grid>
+                        </ViewCell>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

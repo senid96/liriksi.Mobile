@@ -1,0 +1,54 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:converters="clr-namespace:lirksi.Mobile.Converters"
+             x:Class="lirksi.Mobile.Views.PerformerViews.PerformerPage"
+             BackgroundImageSource="background.jpg"
+             Title="{Binding Title}">
+    <ContentPage.Resources>
+        <StyleSheet Source="/Styles/main.css"></StyleSheet>
+        <converters:ImageConverter x:Key="imgConv"></converters:ImageConverter>
+    </ContentPage.Resources>
+    <ContentPage.Content>
+        <ScrollView>
+        <StackLayout Padding="5,5,5,5">
+            <Label Style="{DynamicResource ListItemTextStyle}" Text="Name"></Label>
+            <Frame Padding = "0" CornerRadius="5" IsClippedToBounds="true">
+                <Entry Placeholder="Name" x:Name="PerformerName" Text="{Binding PerformerSearchReq.Name}" TextChanged="PerformerName_TextChanged" ></Entry>
+            </Frame>
+            <Label Style="{DynamicResource ListItemTextStyle}" Text="Surname"></Label>
+            <Frame Padding = "0" CornerRadius="5" IsClippedToBounds="true">
+                <Entry Placeholder="Surname" x:Name="PerformerSurname" Text="{Binding PerformerSearchReq.Surname}" TextChanged="PerformerSurname_TextChanged"></Entry>
+            </Frame>
+            <Label Style="{DynamicResource ListItemTextStyle}" Text="Artistic name"></Label>
+            <Frame Padding = "0" CornerRadius="5" IsClippedToBounds="true">
+                <Entry Placeholder="Artistic name" x:Name="PerformerArtisticName" Text="{Binding PerformerSearchReq.ArtisticName}" TextChanged="PerformerArtisticName_TextChanged"></Entry>
+            </Frame>
+            <ListView ItemsSource="{Binding PerformerList}" x:Name="PerformerList" ItemSelected="PerformerList_ItemSelected">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                            <ViewCell>
+                                <Grid Padding="3">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition></ColumnDefinition>
+                                        <ColumnDefinition></ColumnDefinition>
+                                    </Grid.ColumnDefinitions>
+                                    <StackLayout VerticalOptions="Center" >
+                                        <Label Text="{Binding ArtisticName}" Style="{DynamicResource ListItemTextStyle}" />
+                                        <Label Text="{Binding Surname}" Style="{DynamicResource CaptionStyle}" />
+                                    </StackLayout>
+                                    <StackLayout Grid.Column="1"  HorizontalOptions="End" VerticalOptions="Center">
+                                        <Frame x:Name="circleFrame" HasShadow="False" Padding="0" Margin="0" HorizontalOptions="Center" BackgroundColor="Gray">
+                                            <Image HorizontalOptions="Center" Aspect="Fill" HeightRequest="50" WidthRequest="50"  x:Name="PerformerImg" Source="{Binding Image, Converter={StaticResource imgConv}}" ></Image>
+                                        </Frame>
+                                    </StackLayout>
+                                </Grid>
+                            </ViewCell>
+                        </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+            <Button CornerRadius="5" StyleClass="button-custom" Text="Add new" x:Name="AddPerformerBtn" Clicked="AddPerformerBtn_Clicked"></Button>
+        </StackLayout>
+        </ScrollView>
+    </ContentPage.Content>
+</ContentPage>

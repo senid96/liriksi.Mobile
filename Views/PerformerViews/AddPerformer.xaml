@@ -1,0 +1,39 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:converters="clr-namespace:lirksi.Mobile.Converters"
+             x:Class="lirksi.Mobile.Views.PerformerViews.AddPerformer"
+             BackgroundImageSource="background.jpg"
+             Title="{Binding Title}">
+    <ContentPage.Resources>
+        <converters:ImageConverter x:Key="imgConv"></converters:ImageConverter>
+        <StyleSheet Source="/Styles/main.css"></StyleSheet>
+    </ContentPage.Resources>
+    <ContentPage.Content>
+        <ScrollView>
+        <StackLayout Padding="5,5,5,5">
+                <Label Style="{DynamicResource ListItemTextStyle}" Text="Name"></Label>
+                <Frame Padding = "0" CornerRadius="5" IsClippedToBounds="true">
+                    <Entry Placeholder="Name" x:Name="Name" Text="{Binding PerformerReq.Name}"></Entry>
+                </Frame>
+                <Label Style="{DynamicResource ListItemTextStyle}" Text="Surname"></Label>
+                <Frame Padding = "0" CornerRadius="5" IsClippedToBounds="true">
+                    <Entry Placeholder="Surname" x:Name="Surname" Text="{Binding PerformerReq.Surname}"></Entry>
+                </Frame>
+                <Label Style="{DynamicResource ListItemTextStyle}" Text="ArtisticName"></Label>
+                <Frame Padding = "0" CornerRadius="5" IsClippedToBounds="true">
+                    <Entry Placeholder="Artistic name" x:Name="ArtisticName" Text="{Binding PerformerReq.ArtisticName}"></Entry>
+                </Frame>
+                <Label Style="{DynamicResource ListItemTextStyle}" Text="About"></Label>
+                <Frame Padding = "0" CornerRadius="5" IsClippedToBounds="true">
+                    <Editor Placeholder="About" x:Name="About" HeightRequest="150" Text="{Binding PerformerReq.About}"></Editor>
+                </Frame>
+                <Frame BorderColor="LightPink" x:Name="circleFrame" HasShadow="False" Padding="0" Margin="0" HorizontalOptions="Center">
+                    <Image x:Name="PerfImg" Source="{Binding PerformerReq.Image, Converter={StaticResource imgConv}}" WidthRequest="200" HeightRequest="200"></Image>
+                </Frame>
+                <Button StyleClass="button-custom" CornerRadius="5" x:Name="UploadImage" Text="Upload image" Clicked="UploadImage_Clicked"></Button>
+                <Button StyleClass="button-custom-second" CornerRadius="5" Text="Save" x:Name="SavePerformerBtn" Clicked="SavePerformerBtn_Clicked"></Button>
+        </StackLayout>
+        </ScrollView>
+    </ContentPage.Content>
+</ContentPage>
